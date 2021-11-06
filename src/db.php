@@ -13,18 +13,21 @@ class DB {
      
     
     # Удаленное подключение
-    /*
+    
     const USER = "auGTLg2MG9";
     const PASS = "JbF5EqIV4f";
     const HOST = "remotemysql.com";
     const DB = "auGTLg2MG9";
-    */
+    
     
     # Подключение Cuba
+    /*
     const USER = "dev_roman";
     const PASS = "83rPpywO8y";
     const HOST = "localhost";
     const DB = "wiki"; 
+     
+     */
     
     public static function connToDB(){
             
