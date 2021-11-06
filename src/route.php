@@ -14,13 +14,15 @@ class Routing {
         $route = str_replace(".php", "", $route);
         
         # !!!Временное решение
-        $route[2] = true;
+        /*
 
         # Определяем контроллер и модель
         if ($route[2] != '') {
             $controllerName = ucfirst($route[2] . "Controller");
             $modelName = ucfirst($route[2] . "Model");
         }
+         
+         */
 
         include CONTROLLER_PATH . $controllerName . ".php";
         include MODEL_PATH . $modelName . ".php";
