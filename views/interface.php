@@ -47,7 +47,7 @@
         $(document).on('click', '#wiki-search', function () {
 
             $.ajax({
-                url: "/app/wiki-api/index/menu",
+                url: "/wiki-api/index/menu",
                 method: "POST",
 
                 data: $('#wiki-form-search').serialize(),
