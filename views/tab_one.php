@@ -72,6 +72,12 @@ foreach ($pageData['info'] as $key => $value) {
       
       <p>Содержание статьи</p>
 <?php 
+
+# Временный код
+$route = explode("/", $_SERVER['REQUEST_URI']);
+$route = str_replace(".php", "", $route);
+echo "$route";
+
 $content = $pageData['intelligence'];
 ?>
       <textarea rows='50' cols='100' type=text class='table_name'><?php echo $content['content']; ?></textarea>
