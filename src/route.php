@@ -12,6 +12,9 @@ class Routing {
         # Разбиваем адресную строку по слешу
         $route = explode("/", $_SERVER['REQUEST_URI']);
         $route = str_replace(".php", "", $route);
+        
+        # !!!Временное решение
+        $route[2] = true;
 
         # Определяем контроллер и модель
         if ($route[2] != '') {
