@@ -76,7 +76,7 @@ foreach ($pageData['info'] as $key => $value) {
 # Временный код
 $route = explode("/", $_SERVER['REQUEST_URI']);
 $route = str_replace(".php", "", $route);
-echo "$route";
+print_r($route);
 
 $content = $pageData['intelligence'];
 ?>
