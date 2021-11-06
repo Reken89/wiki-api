@@ -4,10 +4,12 @@
 class DB {
     
     # Локальное подключение
+    /*
     const USER = "tublat";
     const PASS = "12345";
     const HOST = "localhost";
-    const DB = "wiki";
+    const DB = "wiki";   
+     */
      
     
     # Удаленное подключение
@@ -17,6 +19,12 @@ class DB {
     const HOST = "remotemysql.com";
     const DB = "auGTLg2MG9";
     */
+    
+    # Подключение Cuba
+    const USER = "dev_roman";
+    const PASS = "83rPpywO8y";
+    const HOST = "localhost";
+    const DB = "wiki"; 
     
     public static function connToDB(){
             

@@ -15,7 +15,7 @@
         {
             $.ajax({
                 url: "/wiki-api/index/menu",
-
+               
                 method: "POST",
                 success: function (data) {
                     $('#live_data').html(data);
