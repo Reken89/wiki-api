@@ -92,10 +92,11 @@ class IndexModel extends Model {
 
     public function search($search) {
 
-        $sql = "SELECT wordid, coincidence, heading FROM words WHERE word = '$search' order by coincidence DESC";
+        $sql = "SELECT wordid, coincidence, heading FROM words WHERE word = :word order by coincidence DESC";
 
         $res = [];
         $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":word", $search, PDO::PARAM_STR);
         $stmt->execute();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -110,10 +111,11 @@ class IndexModel extends Model {
 
     public function intelligence($heading) {
 
-        $sql = "SELECT heading, content FROM articles WHERE heading = '$heading'";
+        $sql = "SELECT heading, content FROM articles WHERE heading = :heading";
 
         $res = [];
         $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":heading", $heading, PDO::PARAM_STR);
         $stmt->execute();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
