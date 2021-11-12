@@ -6,10 +6,10 @@ session_start();
 # Определяем константы
 
 # Константа для локального сервера
-#define("ROOT", $_SERVER['DOCUMENT_ROOT']. "/wiki-api");
+define("ROOT", $_SERVER['DOCUMENT_ROOT']. "/wiki-api");
 
 # Константа для Heroku
-define("ROOT", $_SERVER['DOCUMENT_ROOT']);
+#define("ROOT", $_SERVER['DOCUMENT_ROOT']);
 
 define("CONTROLLER_PATH", ROOT. "/controllers/");
 define("MODEL_PATH", ROOT. "/models/");

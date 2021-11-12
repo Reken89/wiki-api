@@ -14,7 +14,7 @@ class Routing {
         $route = str_replace(".php", "", $route);
         
         # !!!Временное решение
-        /*
+        
 
         # Определяем контроллер и модель
         if ($route[2] != '') {
@@ -22,7 +22,7 @@ class Routing {
             $modelName = ucfirst($route[2] . "Model");
         }
          
-         */
+         
 
         include CONTROLLER_PATH . $controllerName . ".php";
         include MODEL_PATH . $modelName . ".php";

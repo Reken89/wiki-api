@@ -17,7 +17,7 @@
                 url: "/wiki-api/index/menu",
                
                 method: "POST",
-                success: function (data) {
+                success: function (data) {                   
                     $('#live_data').html(data);
                     setKeydownmyForm()
                 }
@@ -36,7 +36,9 @@
                 dataType: "text",
                 success: function (data)
                 {
-                    alert(data);                    
+                    alert(data); 
+                    //$("#tabs").tabs("select", location.hash);
+                    fetch_data();                    
                 }
             })
         })

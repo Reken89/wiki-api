@@ -56,8 +56,9 @@ class IndexModel extends Model {
         $content = preg_replace('|\s+|', ' ', $content);
 
         # Заполняем таблицу articles (Заголовки и содержимое статьи)
-        $sql = "INSERT INTO articles (content, heading) VALUES ('$content', '$inquiry')";
+        $sql = "INSERT INTO articles (content, heading) VALUES ('$content', :inquiry)";
         $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":inquiry", $inquiry, PDO::PARAM_STR);
         $stmt->execute();
 
         #Заполняем таблицу words (Слова-атомы и количество повторяющихся слов в статье)
@@ -71,15 +72,43 @@ class IndexModel extends Model {
 
         $count = array_count_values($content_array);
 
-        # !!!ИСПОЛЬЗУЯ ЦИКЛ записываем значения в БД (НЕОБХОДИМО ДОРАБОТАТЬ МЕТОД ЗАПИСИ, ЧТО БЫ НЕ ИСПОЛЬЗОВАТЬ SQL ЗАПРОС В ЦИКЛЕ)
-
+        # Создаем пустой массив
+        
+        $work_array = [];       
+        
+        # При помощи цикла заполняем массив нужными значениями
+        
         foreach ($count as $key => $value) {
-
-            $sql = "INSERT INTO words (word, coincidence, heading) VALUES ('$key', '$count[$key]', '$inquiry')";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute();
+            
+            $work_array[] = "('$key', '$count[$key]', '$inquiry')";
+               
         }
+        
+        # Разделяем массив по 300 значений, и считаем количество ключей
+        
+        $work_array = array_chunk($work_array, 300);
+        $number = count($work_array);
+        
+        
+        # Цикл записи в БД (!!!Желательно записывать без цикла)
+        
+        
+        for ($i = 0 ; $i < $number ; ++$i) {
+            
+                   
+            $line = implode(", ", $work_array[$i]);
+ 
+            $sql = "INSERT INTO words (word, coincidence, heading) VALUES $line";
+            $stmt = $this->db->prepare($sql);
+                       
+            $stmt->execute();
+            
+        }
+        
 
+        # Выводим подсказку, сколько раз происходил цикл над БД
+        echo "$number";
+              
         #Заполняем таблицы connection (связующая таблица)
 
         $sql = "INSERT INTO connection (artid, wordid, coincidence) SELECT s.artid, b.wordid, b.coincidence FROM articles AS s, words AS b WHERE s.heading = '$inquiry' AND b.heading = '$inquiry'";
@@ -125,5 +154,6 @@ class IndexModel extends Model {
 
         return $res;
     }
+    
 
 }
